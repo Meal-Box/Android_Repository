@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
+
+
 class menuAdapter(
     val meal:List<Meal>
 ): RecyclerView.Adapter<menuAdapter.menuViewHolder>(){
@@ -19,7 +21,7 @@ class menuAdapter(
         )
 
     override fun onBindViewHolder(holder: menuViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(meal[position])
     }
 
     override fun getItemCount() = meal.size
@@ -27,12 +29,10 @@ class menuAdapter(
     class menuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         private val mealTextView:TextureView=itemView.findViewById(R.id.mealTextView)
-        private val nameTextView:TextureView=itemView.findViewById(R.id.nameTextView)
 
 
         fun bind(meal:Meal){
             mealTextView.text = meal.meal
-            nameTextView.text = meal.name
 
         }
 
