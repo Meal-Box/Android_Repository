@@ -7,7 +7,6 @@ import android.os.Handler
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import androidx.annotation.UiThread
 
 class Splash : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,7 +14,7 @@ class Splash : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         splashAnimation()
     }
-    @UiThread
+
     private fun splashAnimation(){
         val imageView = findViewById<ImageView>(R.id.splash_imageView)
         val imageAnim : Animation = AnimationUtils.loadAnimation(this,R.anim.anim_splash_imageview)
@@ -39,3 +38,4 @@ class Splash : AppCompatActivity() {
     }
 
 }
+
