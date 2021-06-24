@@ -1,12 +1,17 @@
 package com.example.mealbox1
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.math.absoluteValue
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,11 +19,12 @@ class MainActivity : AppCompatActivity() {
         findViewById(R.id.mealTextView)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val pagerAdapter = ScreenSlidePagerAdapter(this)
+        viewPager.adapter = pagerAdapter
         initViews()
     }
 
@@ -37,30 +43,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    private fun parseQuotesJson(json: String): List<Meal> {
-        val jsonArray = JSONArray(json)
-        var jsonList = emptyList<JSONObject>()
-        for (index in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(index)
-            jsonObject?.let {
-                jsonList = jsonList + it
+    override fun onBackPressed() {
+        if (viewPager.currentItem == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+            // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed()
+        } else {
+            // Otherwise, select the previous step.
+            viewPager.currentItem = viewPager.currentItem - 1
+        }
+    }
+
+    private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+        override fun getItemCount(): Int = 3
+
+        override fun createFragment(position: Int): Fragment {
+            return when(position) {
+                1 -> breakfastActivity()
+                2 -> lunchActivity()
+                else -> dinnerActivity()
             }
         }
-
-        return jsonList.map {
-            Meal(
-                meal = it.getString("quote"),
-            )
-        }
     }
 
-    private fun displayQuotesPager(quotes: List<Meal>, isNameRevealed: Boolean) {
-        val adapter = menuAdapter(
-            meal = quotes,
-            isNameRevealed = isNameRevealed
-        )
-        viewPager.adapter = adapter
-        viewPager.setCurrentItem(adapter.itemCount / 2, false)
-    }
 }
 
