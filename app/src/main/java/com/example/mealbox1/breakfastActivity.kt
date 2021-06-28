@@ -27,9 +27,7 @@ class breakfastActivity  : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view1=inflater.inflate(R.layout.breakfast, container, false)
-        /*mealText=view1.findViewById(R.id.tvItemTitle1)
-        calendarView=view1.findViewById(R.id.calendarView)*/
-
+        calendarView=view1.findViewById(R.id.calendarView)
         mealText1=view1.findViewById(R.id.tvItemTitle1)
 
         setRetrofit()
