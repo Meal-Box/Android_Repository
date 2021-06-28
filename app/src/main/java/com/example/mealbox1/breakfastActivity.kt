@@ -63,16 +63,6 @@ class breakfastActivity  : Fragment(){
         })
     }
 
-    private fun createOkHttpClient(): OkHttpClient {
-        val builder = OkHttpClient.Builder()
-
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-        builder.addInterceptor(interceptor)
-        return builder.build()
-    }
-
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -83,4 +73,13 @@ class breakfastActivity  : Fragment(){
 
     }
 
+}
+
+private fun createOkHttpClient(): OkHttpClient {
+    val builder = OkHttpClient.Builder()
+
+    val interceptor = HttpLoggingInterceptor()
+    interceptor.level = HttpLoggingInterceptor.Level.BODY
+    builder.addInterceptor(interceptor)
+    return builder.build()
 }
