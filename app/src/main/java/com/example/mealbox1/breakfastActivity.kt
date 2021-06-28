@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.CalendarView
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -18,11 +19,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class breakfastActivity  : Fragment(){
 
-    lateinit var custom1:CalendarView
+    lateinit var mealText:ViewPager2
+    lateinit var calendarView: CalendarView
+    var day=calendarView.date
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view1=inflater.inflate(R.layout.breakfast, container, false)
-        custom1=view1.findViewById(R.id.calendarView)
+        mealText=view1.findViewById(R.id.mealTextView)
+        calendarView=view1.findViewById(R.id.calendarView)
 
         setRetrofit()
 
@@ -38,7 +42,7 @@ class breakfastActivity  : Fragment(){
 
         val service = retrofit.create(MealService::class.java)    // Retrofit 생성 - UserService
 
-        val call: Call<MealService> = service.ApiService("1d3419d33851476cb4054041572c6cce","json",1,10,"F10","7380292", "${custom1.date}","1")    // call 객체 생성
+        val call: Call<MealService> = service.ApiService("1d3419d33851476cb4054041572c6cce","json",1,10,"F10","7380292", "${day}","1")    // call 객체 생성
         call.enqueue(object : Callback<MealService> {    // enqueue() 메소드를 사용한 요청 처리, Callback interface 구현
             override fun onFailure(call: Call<MealService>, t: Throwable) {    // 요청이 실패되었을 경우의 처리
                 //Toast.makeText(applicationContext, "실패", Toast.LENGTH_SHORT).show()    // 화면에 Toast 메세지 [실패] 출력
@@ -55,7 +59,7 @@ class breakfastActivity  : Fragment(){
                     if (response.isSuccessful) {
                         for (i in res.indices) {
                             val obj = res[i]
-                            custom1.date = "${obj.DDISH_NM}"
+                            mealText= "${obj.DDISH_NM}"
                         }
                     }
                 }
