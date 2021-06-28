@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
+import android.widget.TextView
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -19,14 +20,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class breakfastActivity  : Fragment(){
 
-    lateinit var mealText:ViewPager2
     lateinit var calendarView: CalendarView
     var day=calendarView.date
 
+    lateinit var mealText1:TextView
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view1=inflater.inflate(R.layout.breakfast, container, false)
-        mealText=view1.findViewById(R.id.tvItemTitle)
-        calendarView=view1.findViewById(R.id.calendarView)
+        /*mealText=view1.findViewById(R.id.tvItemTitle1)
+        calendarView=view1.findViewById(R.id.calendarView)*/
+
+        mealText1=view1.findViewById(R.id.tvItemTitle1)
 
         setRetrofit()
 
@@ -42,15 +46,15 @@ class breakfastActivity  : Fragment(){
 
         val service = retrofit.create(MealService::class.java)    // Retrofit 생성 - UserService
 
-        val call: Call<MealService> = service.ApiService("1d3419d33851476cb4054041572c6cce","json",1,10,"F10","7380292", "${day}","1")    // call 객체 생성
-        call.enqueue(object : Callback<MealService> {    // enqueue() 메소드를 사용한 요청 처리, Callback interface 구현
-            override fun onFailure(call: Call<MealService>, t: Throwable) {    // 요청이 실패되었을 경우의 처리
+        val call: Call<Meal> = service.ApiService("1d3419d33851476cb4054041572c6cce","json",1,10,"F10","7380292", "${day}","1")    // call 객체 생성
+        call.enqueue(object : Callback<Meal> {    // enqueue() 메소드를 사용한 요청 처리, Callback interface 구현
+            override fun onFailure(call: Call<Meal>, t: Throwable) {    // 요청이 실패되었을 경우의 처리
                 //Toast.makeText(applicationContext, "실패", Toast.LENGTH_SHORT).show()    // 화면에 Toast 메세지 [실패] 출력
                 println("실패")
                 Log.d("Test", t.toString())
             }
 
-            override fun onResponse(call: Call<MealService>, response: Response<MealService>) {    // 요청이 성공되었을 경우의 처리
+            override fun onResponse(call: Call<Meal>, response: Response<Meal>) {    // 요청이 성공되었을 경우의 처리
                 if (response.body()!=null) {     // 받아온 결과에 body() 부분이 null이 아닐 경우
                     //Toast.makeText(applicationContext, "성공", Toast.LENGTH_SHORT).show()    // 화면에 Toast 메세지 [성공] 출력
                     println("성공")
@@ -59,7 +63,7 @@ class breakfastActivity  : Fragment(){
                     if (response.isSuccessful) {
                         for (i in res.indices) {
                             val obj = res[i]
-                            mealText= "${obj.DDISH_NM}"
+                            mealText1.text= "${obj.DDISH_NM}"
                         }
                     }
                 }

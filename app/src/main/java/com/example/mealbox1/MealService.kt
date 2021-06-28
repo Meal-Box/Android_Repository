@@ -15,5 +15,5 @@ interface MealService {
         @Query("SD_SCHUL_CODE") SD_SCHUL_CODE:String,
         @Query("MLSV_YMD") MLSV_YMD:String,
         @Query("MMEAL_SC_CODE") MMEAL_SC_CODE:String
-    ): Call<MealService>
+    ): Call<Meal>
 }
