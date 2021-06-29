@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+
+    tools:context=".ui.activity.MainActivity">
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <!-- Ellipse 6 -->
+        <View
+            android:id="@+id/ellipse_6"
+            android:layout_width="192dp"
+            android:layout_height="189dp"
+            android:layout_marginStart="280dp"
+            android:layout_marginTop="500dp"
+            android:background="@drawable/ellipse_6" />
+
+        <View
+            android:id="@+id/ellipse_9"
+            android:layout_width="300dp"
+            android:layout_height="271dp"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="600dp"
+            android:background="@drawable/ellipse_9" />
+
+        <!-- Ellipse 5 -->
+        <View
+            android:id="@+id/ellipse_5"
+            android:layout_width="257dp"
+            android:layout_height="235dp"
+            android:layout_marginStart="-110dp"
+            android:layout_marginTop="-30dp"
+            android:background="@drawable/ellipse_5" />
+
+        <!-- Ellipse 2 -->
+        <View
+            android:id="@+id/ellipse_2"
+            android:layout_width="170dp"
+            android:layout_height="164dp"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="-86dp"
+            android:background="@drawable/ellipse_2" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="130dp"
+            android:layout_gravity="center"
+            android:dateTextAppearance="@style/CalenderViewDateCustomText"
+            android:theme="@style/CalenderViewCustom"
+            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/mealTextView"
+            android:layout_width="350dp"
+            android:layout_height="250dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="180dp"
+            android:layout_gravity="center"
+            android:background="@drawable/xml_border"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+    </FrameLayout>
+
+
+</LinearLayout>
